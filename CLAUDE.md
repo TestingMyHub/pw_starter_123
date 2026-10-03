@@ -49,3 +49,11 @@ The Playwright MCP server is configured in `.mcp.json` (project scope, `npx @pla
 - Tests are independent — state is set up via `shopFacade`/fixtures in `beforeEach`, not by depending on other tests.
 - Test IDs (`C01`, `P01`, `CH01`, ...) plus `@regression` tag are used for targeted runs via `--grep`.
 - Parameterized tests: not yet used in this repo — see [reference/reference.md](reference/reference.md) for the `for...of` loop pattern to follow when adding them.
+
+## CI
+
+GitHub Actions in `.github/workflows/`:
+
+- `static-checks.yml` � lint, Prettier check and `tsc --noEmit` on every PR and push to `main`.
+- `playwright.yml` � runs the Playwright suite and uploads the HTML report.
+- `ai-review.yml` � comment `ai_review` on a PR (after Static Checks pass) to get an inline review from the `pw-code-review` skill. Needs the `CLAUDE_CODE_OAUTH_TOKEN` secret.
